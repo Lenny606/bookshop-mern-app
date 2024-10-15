@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
+import {FaGoogle} from "react-icons/fa";
 
 const Login = () => {
 
@@ -27,11 +28,22 @@ const Login = () => {
                     {
                         message && <p className={'text-red text-xs italic'}>{message}</p>
                     }
-                    <button className={'p-1 sm:px-6 px-2 w-full sm:w-1/2 rounded-md bg-primary hover:bg-secondary font-medium mb-2'}>Login</button>
+                    <button
+                        className={'p-1 sm:px-6 px-2 w-full sm:w-1/2 rounded-md bg-primary hover:bg-secondary font-medium mb-2'}>Login
+                    </button>
                 </form>
-                <p className={'font-medium text-sm align-baseline'}>Haven't an account? Register <Link to={'/register'}  className={'text-dark-blue hover:underline'}>here.</Link> </p>
+                <p className={'font-medium text-sm align-baseline'}>Haven't an account? Register <Link to={'/register'}
+                                                                                                       className={'text-dark-blue hover:underline'}>here.</Link>
+                </p>
 
-            {/*    GOOGLE LOGIN */}
+                {/*    GOOGLE LOGIN */}
+                <div className={'mt-4'}>
+                    <button className={'w-full flex flex-wrap items-center justify-center gap-1 bg-secondary hover:bg-primary font-medium rounded py-2 px-4 '}>
+                        <FaGoogle className={'mr-2'}/>
+                        Sign in with Google
+                    </button>
+                </div>
+                <p className={'mt-4 italic text-sm font-medium text-gray text-center '}>@{new Date().getFullYear()}. All right reserved</p>
             </div>
         </div>
     )
