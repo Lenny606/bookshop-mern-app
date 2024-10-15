@@ -4,11 +4,19 @@ import App from "../App.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
-        component: <App/>,
+        element: <App/>,
         children: [
             {
                 path: "/",
                 element: <div>Home</div>
+            },
+            {
+                path: "/about",
+                element: <div>about</div>
+            },
+            {
+                path: "/orders",
+                element: <div>Orders</div>
             }
         ]
     }
