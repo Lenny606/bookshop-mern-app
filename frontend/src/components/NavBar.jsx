@@ -32,7 +32,7 @@ const navigation = [
 const NavBar = () => {
 
     const [isDropDown, setIsDropDown] = useState(false)
-    const user = true;
+    const user = false;
 
     return (
         <header className={'max-w-screen-2xl mx-auto px-4 py-6'}>
