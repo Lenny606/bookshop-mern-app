@@ -30,10 +30,30 @@ const cartSlice = createSlice({
                     confirmButtonColor: "#f1c40f",
                 })
             }
+        },
+        removeFromCart: (state, action) => {
+            state.cartItems = state.cartItems.filter(item => item._id!== action.payload._id)
+            Swal.fire({
+                position: 'top-end',
+                icon:'success',
+                title: 'Item removed successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        },
+        clearCart: (state, action) => {
+            state.cartItems = []
+            Swal.fire({
+                position: 'top-end',
+                icon:'success',
+                title: 'All items removed successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     }
 })
 
 //export actions
-export const {addToCart} = cartSlice.actions;
+export const {addToCart, removeFromCart, clearCart} = cartSlice.actions;
 export default cartSlice.reducer;
