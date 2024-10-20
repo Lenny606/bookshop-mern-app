@@ -13,3 +13,7 @@ npm install sweetalert2
 # react redux + bindings
 npm install @reduxjs/toolkit
 npm install react-redux
+
+
+## BACKEND 
+npm i cors
