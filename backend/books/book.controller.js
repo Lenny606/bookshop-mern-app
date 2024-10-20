@@ -43,3 +43,15 @@ export const editBook = async (req, res) => {
         res.status(500).send({success: false, message: err})
     }
 }
+export const deleteBook = async (req, res) => {
+    try {
+        const {id} = req.params
+        const book = await Book.findByIdAndDelete(id)
+        if (!book) {
+            res.status(404).send({success: true, message: "book not find"})
+        }
+        res.status(200).send({success: true, message: "book deleted"})
+    } catch (err) {
+        res.status(500).send({success: false, message: err})
+    }
+}
