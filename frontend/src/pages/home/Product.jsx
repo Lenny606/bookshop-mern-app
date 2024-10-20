@@ -2,8 +2,11 @@ import {Link} from "react-router-dom";
 import banner from "../../../public/banner.webp"
 import {useDispatch} from "react-redux";
 import {addToCart} from "../../redux/features/cart/cartSlice.js";
+import {useFetchAllBooksQuery} from "../../redux/features/cart/booksApi.js";
 
 const Product = ({product}) => {
+    //getting product from API
+    const {data:books} = useFetchAllBooksQuery();
 
     const dispatch = useDispatch()
     const handleCart = (product) => {
