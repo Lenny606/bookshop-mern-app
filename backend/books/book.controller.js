@@ -14,7 +14,7 @@ export const createBook = async (req, res) => {
 export const getBooks = async (req, res) => {
     try {
         const books = await Book.find()
-        res.status(200).send({success: true, message: books.length < 1 ? "no books in dtb": "", data: books})
+        res.status(200).send({success: true, message: books.length < 1 ? "no books in dtb" : "", data: books})
     } catch (err) {
         res.status(500).send({success: false, message: err})
     }
@@ -27,6 +27,18 @@ export const getBook = async (req, res) => {
             res.status(404).send({success: true, message: "book not find"})
         }
         res.status(200).send({success: true, data: book})
+    } catch (err) {
+        res.status(500).send({success: false, message: err})
+    }
+}
+export const editBook = async (req, res) => {
+    try {
+        const {id} = req.params
+        const book = await Book.findByIdAndUpdate(id, req.body, {new: true})
+        if (!book) {
+            res.status(404).send({success: true, message: "book not find"})
+        }
+        res.status(200).send({success: true, message: "book updated", data: book})
     } catch (err) {
         res.status(500).send({success: false, message: err})
     }
