@@ -5,6 +5,7 @@ import {HiOutlineUser, HiOutlineHeart, HiOutlineShoppingCart} from "react-icons/
 import {RxAvatar} from "react-icons/rx";
 import {useState} from "react";
 import NavLink from "./NavLink.jsx";
+import {useSelector} from "react-redux";
 
 const navigation = [
     {
@@ -32,6 +33,8 @@ const navigation = [
 const NavBar = () => {
 
     const [isDropDown, setIsDropDown] = useState(false)
+    //redux method
+    const [cartItems, setCartItems] = useSelector(state => state.cart.cartItems)
     const user = false;
 
     return (
@@ -89,7 +92,11 @@ const NavBar = () => {
                     </button>
                     <Link to={"/cart"} className={"flex items-center p-1 sm:px-6 px-2 rounded-md bg-primary"}>
                         <HiOutlineShoppingCart className={'size-6'}/>
-                        <span>0</span>
+                        {
+                           cartItems && cartItems.length > 0 ?
+                                <span className={'text-sm font-semibold sm:ml-1'}>{cartItems.length}</span> :
+                                <span className={'text-sm font-semibold sm:ml-1'}>0</span>
+                        }
                     </Link>
                 </div>
             </nav>
