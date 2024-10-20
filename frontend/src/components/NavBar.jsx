@@ -34,7 +34,7 @@ const NavBar = () => {
 
     const [isDropDown, setIsDropDown] = useState(false)
     //redux method
-    const [cartItems, setCartItems] = useSelector(state => state.cart.cartItems)
+    const cartItems = useSelector(state => state.cart.cartItems)
     const user = false;
 
     return (
