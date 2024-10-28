@@ -7,6 +7,7 @@ import Login from "../components/Login.jsx";
 import {CartPage} from "../pages/cart/CartPage.jsx";
 import {CheckoutPage} from "../pages/cart/CeckoutPage.jsx";
 import SingleBook from "../pages/home/SingleBook.jsx";
+import {PrivateRoute} from "./PrivateRoute.jsx";
 
 const router = createBrowserRouter([
     {
@@ -15,11 +16,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />
+                element: <Home/>
             },
             {
                 path: "/about",
-                element: <About />
+                element: <About/>
             },
             {
                 path: "/orders",
@@ -27,23 +28,23 @@ const router = createBrowserRouter([
             },
             {
                 path: "/cart",
-                element: <CartPage />
+                element: <CartPage/>
             },
             {
                 path: "/checkout",
-                element: <CheckoutPage />
+                element: <PrivateRoute><CheckoutPage/></PrivateRoute> //protected route
             },
             {
                 path: "/login",
-                element: <Login />
+                element: <Login/>
             },
             {
                 path: "/register",
-                element: <Register />
+                element: <Register/>
             },
             {
                 path: "/books/:id",
-                element: <SingleBook />
+                element: <SingleBook/>
             }
         ]
     }

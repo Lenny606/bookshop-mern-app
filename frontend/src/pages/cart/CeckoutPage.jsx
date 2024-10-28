@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearCart, removeFromCart} from "../../redux/features/cart/cartSlice.js";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
+import {useAuth} from "../../context/auth/AuthContext.jsx";
 
 
 export const CheckoutPage = () => {
@@ -10,7 +11,8 @@ export const CheckoutPage = () => {
     const cartItems = useSelector(state => state.cart.cartItems)
     const dispatch = useDispatch()
 
-    const currentUser = true //TODO logic
+    const {currentUser} = useAuth()
+
     const [isChecked, setIsChecked] = useState()
 
     const {register, handleSubmit, watch, formState: {errors}} = useForm();
