@@ -1,9 +1,11 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {clearCart, removeFromCart} from "../../redux/features/cart/cartSlice.js";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {useAuth} from "../../context/auth/AuthContext.jsx";
+import {useCreateOrderMutation} from "../../redux/features/cart/ordersApi.js";
+import Swal from "sweetalert2";
 
 
 export const CheckoutPage = () => {
@@ -16,12 +18,14 @@ export const CheckoutPage = () => {
     const [isChecked, setIsChecked] = useState()
 
     const {register, handleSubmit, watch, formState: {errors}} = useForm();
+    const navigate = useNavigate()
+    const [createOrder, {isLoading, error}] = useCreateOrderMutation()
     //sums cart items
     // TODO
     // const totalPrice = cartItems.reduce((acc, item) => acc + item.price).toFixed(2)
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+
         //     new order
         const newOrder = {
             name: data.name,
@@ -36,8 +40,33 @@ export const CheckoutPage = () => {
             productIds: cartItems.map((item) => item?.productId),
             totalPrice: 100
         }
+        try {
+            await createOrder(newOrder).unwrap() //unwrap
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Confirmed order',
+                text: "Order was saved",
+                showConfirmButton: false,
+                timer: 1500
+            })
+            navigate("/orders")
+        } catch (err) {
+            console.error(err)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Item does exist',
+                showCancelButton: true,
+                confirmButtonText: "OK",
+                confirmButtonColor: "#f1c40f",
+            })
+        }
     }
 
+    if (isLoading){
+        return <div>Loading...</div>
+    }
     return (
         <section>
             <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
