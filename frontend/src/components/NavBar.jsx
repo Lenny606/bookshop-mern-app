@@ -6,6 +6,7 @@ import {RxAvatar} from "react-icons/rx";
 import {useState} from "react";
 import NavLink from "./NavLink.jsx";
 import {useSelector} from "react-redux";
+import {useAuth} from "../context/auth/AuthContext.jsx";
 
 const navigation = [
     {
@@ -35,7 +36,13 @@ const NavBar = () => {
     const [isDropDown, setIsDropDown] = useState(false)
     //redux method
     const cartItems = useSelector(state => state.cart.cartItems)
-    const user = false;
+
+    //get user state from Context
+    const {currentUser, logout} = useAuth()
+
+    const handleLogout = () => {
+        logout()
+    }
 
     return (
         <header className={'max-w-screen-2xl mx-auto px-4 py-6'}>
@@ -57,10 +64,10 @@ const NavBar = () => {
                 <div className={'relative flex justify-between items-center space-x-2 md:space-x-3'}>
                     <div>
                         {
-                            user ? <>
+                            currentUser ? <>
                                     <button onClick={() => setIsDropDown(!isDropDown)}>
                                         <img src={'avatar.png'} alt={''}
-                                             className={`size-7 rounded-full ${user ? "ring-2 ring-secondary" : ""}`}/>
+                                             className={`size-7 rounded-full ${currentUser ? "ring-2 ring-secondary" : ""}`}/>
                                     </button>
                                     {/* Display the drop down*/}
                                     {
@@ -73,6 +80,9 @@ const NavBar = () => {
                                                             )
                                                         )
                                                     }
+                                                    <li>
+                                                        <button  className={'block px-4 py-2 text-sm hover:bg-primary text-secondary'} onClick={()=>handleLogout()}>Logout</button>
+                                                    </li>
                                                 </ul>
                                             </div>
 
