@@ -5,7 +5,7 @@ export const createBook = async (req, res) => {
     const newBook = Book({...req.body})
     try {
         const response = await newBook.save()
-        res.status(201).send({success: true, message: "saved book", data: newBook})
+        res.status(201).send({success: true, message: "saved book", data: response})
     } catch (err) {
         res.status(500).send({success: false, message: err})
     }
