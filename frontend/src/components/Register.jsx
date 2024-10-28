@@ -1,13 +1,26 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {FaGoogle} from "react-icons/fa";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
+import {useAuth} from "../context/auth/AuthContext.jsx";
 
 const Register = () => {
 
     const [message, setMessage] = useState('')
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const {register, handleSubmit, watch, formState: {errors}} = useForm();
+    //get Context
+    const {registerUser} = useAuth();
+    const onSubmit = async (data) => {
+
+        try {
+            await registerUser(data.email, data.password)
+            setMessage("User registered")
+        } catch (e) {
+            setMessage("Provide credentials")
+        }
+
+
+    };
     const handleGoogleSignIn = () => console.log();
     return (
         <div className={"h-[calc(100vh-120px)] flex justify-center items-center"}>
@@ -19,7 +32,7 @@ const Register = () => {
                     <div className={'mb-4'}>
                         <label htmlFor={'email'}
                                className={'block text-gray-700 text-sm font-medium mb-2'}>Email</label>
-                        <input  {...register("email", { required: true })}
+                        <input  {...register("email", {required: true})}
                                 type={'email'} name={"email"} id={'email'} placeholder={"Email"}
                                 className={"shadow appearance-none border-gray w-full rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-primary "}/>
                     </div>
@@ -29,7 +42,7 @@ const Register = () => {
                     <div className={'mb-4'}>
                         <label htmlFor={'password'}
                                className={'block text-gray-700 text-sm font-medium mb-2'}>Password</label>
-                        <input  {...register("password", { required: true })}
+                        <input  {...register("password", {required: true})}
                                 type={'password'} name={"password"} id={'password'} placeholder={"Password"}
                                 className={"shadow appearance-none border-gray w-full rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-primary "}/>
                     </div>
@@ -41,7 +54,7 @@ const Register = () => {
                     </button>
                 </form>
                 <p className={'font-medium text-sm align-baseline'}>Have an account? Login <Link to={'/login'}
-                                                                                                       className={'text-dark-blue hover:underline'}>here.</Link>
+                                                                                                 className={'text-dark-blue hover:underline'}>here.</Link>
                 </p>
 
                 {/*    GOOGLE LOGIN */}
@@ -52,7 +65,8 @@ const Register = () => {
                         Sign in with Google
                     </button>
                 </div>
-                <p className={'mt-4 italic text-sm font-medium text-gray text-center '}>@{new Date().getFullYear()}. All right reserved</p>
+                <p className={'mt-4 italic text-sm font-medium text-gray text-center '}>@{new Date().getFullYear()}. All
+                    right reserved</p>
             </div>
         </div>
     )
