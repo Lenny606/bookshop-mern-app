@@ -10,7 +10,7 @@ const Login = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate()
 
-    const {loginUser} = useAuth();
+    const {loginUser, signInWithGoogle} = useAuth();
     const onSubmit = async (data) => {
         try {
             await loginUser(data.email, data.password)
@@ -20,7 +20,15 @@ const Login = () => {
         }
 
     }
-    const handleGoogleSignIn = () => console.log();
+    const handleGoogleSignIn = async() => {
+        try {
+            await signInWithGoogle()
+            navigate("/")
+        } catch (e) {
+            setMessage("Google sign failed")
+            console.error(e)
+        }
+    };
 
     ;
     return (
