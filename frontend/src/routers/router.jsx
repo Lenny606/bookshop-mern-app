@@ -8,6 +8,7 @@ import {CartPage} from "../pages/cart/CartPage.jsx";
 import {CheckoutPage} from "../pages/cart/CeckoutPage.jsx";
 import SingleBook from "../pages/home/SingleBook.jsx";
 import {PrivateRoute} from "./PrivateRoute.jsx";
+import OrdersPage from "../pages/home/OrdersPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/orders",
-                element: <div>Orders</div>
+                element: <PrivateRoute><OrdersPage/></PrivateRoute>
             },
             {
                 path: "/cart",
