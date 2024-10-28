@@ -19,6 +19,16 @@ export const getOrders = async (req, res) => {
         res.status(500).send({success: false, message: err})
     }
 }
+export const getOrdersByEmail = async (req, res) => {
+    try {
+        const {email} = req.params
+        const orders = await Order.find({email: email}).sort({createdAt: -1})
+        res.status(200).send({success: true, message: orders.length < 1 ? "no orders in dtb" : "", data: orders})
+    } catch (err) {
+        res.status(500).send({success: false, message: err})
+    }
+}
+
 export const getOrder = async (req, res) => {
     try {
         const {id} = req.params

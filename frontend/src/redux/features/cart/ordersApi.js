@@ -55,7 +55,11 @@ export const ordersApi = createApi({
                 method: "DELETE"
             }),
             invalidatesTags: ['Orders']
-        })
+        }),
+        getOrdersByEmail: builder.query({
+            query: (email) => `/email/${email}`,
+            providesTags: (result, error, email) => [{type: "Orders", email}]
+        }),
     })
 })
 
@@ -64,5 +68,6 @@ export const {
     useFetchOrderByIdQuery,
     useCreateOrderMutation,
     useUpdateOrderMutation,
-    useDeleteOrderMutation
+    useDeleteOrderMutation,
+    useGetOrdersByEmail
 } = ordersApi
