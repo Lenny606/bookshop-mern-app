@@ -1,31 +1,44 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    title: {
+    name: {
         type: String,
         required: true
     },
-    description: {
+    email: {
         type: String,
         required: true
     },
-    category: {
-        type: String,
-        required: true
+    address: {
+        city: {
+            type: String,
+            required: true
+        },
+        country: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        zipcode: {
+            type: String,
+            required: true
+        },
     },
-    trending: {
-        type: Boolean,
-        required: true
-    },
-    coverImage: {
-        type: String,
-        required: true
-    },
-    oldPrice: {
+    phone: {
         type: Number,
         required: true
     },
-    newPrice: {
+    productIds: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book",
+            required: true
+        }
+    ],
+    totalPrice: {
         type: Number,
         required: true
     },
