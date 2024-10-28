@@ -8,6 +8,6 @@ export default configureStore({
         [booksApi.reducerPath]: booksApi.reducer
     },
     middleware: (getDefaultMiddleware) => {
-        getDefaultMiddleware().concat(booksApi.middleware)
+        return getDefaultMiddleware().concat(booksApi.middleware)
     }
 })
