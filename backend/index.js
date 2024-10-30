@@ -26,8 +26,10 @@ app.use(cors({
 //routes
 import booksRoutes from "./books/book.route.js";
 import ordersRoutes from "./orders/order.route.js";
+import userRoutes from "./users/user.route.js";
 app.use("/api/v1/books", booksRoutes)
 app.use("/api/v1/orders", ordersRoutes)
+app.use("/api/v1/users", userRoutes)
 
 async function main() {
     await mongoose.connect(process.env.DB_URL)

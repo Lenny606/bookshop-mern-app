@@ -20,3 +20,5 @@ npm install react-redux
 
 ## BACKEND 
 npm i cors
+npm i jsonwebtoken
+npm i bcrypt
