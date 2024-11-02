@@ -9,6 +9,7 @@ import {CheckoutPage} from "../pages/cart/CeckoutPage.jsx";
 import SingleBook from "../pages/home/SingleBook.jsx";
 import {PrivateRoute} from "./PrivateRoute.jsx";
 import OrdersPage from "../pages/home/OrdersPage.jsx";
+import {DashboardLayout} from "../pages/dashboard/DashboardLayout.jsx";
 import {AdminRoute} from "./AdminRoute.jsx";
 import AdminLogin from "../components/AdminLogin.jsx";
 
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <AdminRoute><div>Dashboard</div></AdminRoute>,
+        element: <AdminRoute><DashboardLayout /></AdminRoute>,
         children: [
             {
                 path: "",
