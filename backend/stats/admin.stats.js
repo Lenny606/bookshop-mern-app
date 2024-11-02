@@ -10,14 +10,14 @@ export const getStatistics =  async (req, res) => {
         const totalOrders = await Order.countDocuments();
 
         // 2. Total sales (sum of all totalPrice from orders)
-        // const totalSales = await Order.aggregate([
-        //     {
-        //         $group: {
-        //             _id: null,
-        //             totalSales: { $sum: "$totalPrice" },
-        //         }
-        //     }
-        // ]);
+        const totalSales = await Order.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalSales: { $sum: "$totalPrice" },
+                }
+            }
+        ]);
 
         // 4. Trending books statistics:
         const trendingBooksCount = await Book.aggregate([
