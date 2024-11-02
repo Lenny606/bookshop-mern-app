@@ -13,6 +13,10 @@ npm install sweetalert2
 # firebase
 npm install firebase
 
+# charts
+npm i react-chartjs-2
+npm i chartjs
+
 # react redux + bindings
 npm install @reduxjs/toolkit
 npm install react-redux
