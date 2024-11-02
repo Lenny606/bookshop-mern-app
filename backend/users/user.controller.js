@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import User from "./user.model.js";
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
-export const Admin = async (req, res) => {
+export const createAdmin = async (req, res) => {
     const {name: username, password} = req.body
     try {
         const admin = await User.findOne({username})

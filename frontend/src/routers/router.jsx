@@ -9,6 +9,8 @@ import {CheckoutPage} from "../pages/cart/CeckoutPage.jsx";
 import SingleBook from "../pages/home/SingleBook.jsx";
 import {PrivateRoute} from "./PrivateRoute.jsx";
 import OrdersPage from "../pages/home/OrdersPage.jsx";
+import {AdminRoute} from "./AdminRoute.jsx";
+import AdminLogin from "../components/AdminLogin.jsx";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +48,42 @@ const router = createBrowserRouter([
             {
                 path: "/books/:id",
                 element: <SingleBook/>
+            }
+        ]
+    },
+    {
+        path: "/admin",
+        element: <AdminLogin />
+    },
+    {
+        path: "/dashboard",
+        element: <AdminRoute>
+            <div>Dashboard</div>
+        </AdminRoute>,
+        children: [
+            {
+                path: "",
+                element: <AdminRoute>
+                    <div>Dashboard Menu</div>
+                </AdminRoute>
+            },
+            {
+                path: "create-book",
+                element: <AdminRoute>
+                    <div>Create</div>
+                </AdminRoute>
+            },
+            {
+                path: "edit-book/:id",
+                element: <AdminRoute>
+                    <div>Edit</div>
+                </AdminRoute>
+            },
+            {
+                path: "manage-books",
+                element: <AdminRoute>
+                    <div>Manage</div>
+                </AdminRoute>
             }
         ]
     }
