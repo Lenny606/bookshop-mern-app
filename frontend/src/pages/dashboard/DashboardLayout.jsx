@@ -2,45 +2,52 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {getBaseUrl} from "../../utils/baseUrl.js";
 import {Loading} from "../../components/Loading.jsx";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import {MdOutlineManageHistory} from "react-icons/md";
 import {HiViewGridAdd} from "react-icons/hi";
 
 export const DashboardLayout = () => {
 
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState({})
+    // const [loading, setLoading] = useState(true)
+    // const [data, setData] = useState({})
+    // const navigate = useNavigate()
+    //
+    // //TODO refactor for redux
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get(getBaseUrl() + '/api/v1/admin/stats',
+    //                 {
+    //                     headers: {
+    //                         'Authorization': 'Bearer ' + localStorage.getItem('token')
+    //                     }
+    //                 })
+    //
+    //             setData(response.data)
+    //             setLoading(false)
+    //
+    //         } catch (e) {
+    //             console.error(e)
+    //         }
+    //     }
+    //     fetchData()
+    //
+    // }, []);
 
-    //TODO refactor for redux
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(getBaseUrl() + '/api/v1/admin/stats',
-                    {
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem('token')
-                        }
-                    })
-
-                setData(response.data)
-                setLoading(false)
-
-            } catch (e) {
-                console.error(e)
-            }
-        }
-        fetchData()
-
-    }, []);
-
-    if(loading) {
-        return <Loading />
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate("/")
     }
+
+
+    // if(loading) {
+    //     return <Loading />
+    // }
 
     return (
         <section className="flex md:bg-gray-100 min-h-screen overflow-hidden">
             <aside className="hidden sm:flex sm:flex-col">
-                <a href="/" className="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500">
+                <a href="/" className="inline-flex items-center justify-center h-20 w-20 bg-purple hover:bg-purple-500 focus:bg-purple-500">
                     <img src="/fav-icon.png" alt="" />
                 </a>
                 <div className="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
@@ -57,7 +64,7 @@ export const DashboardLayout = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
                         </Link>
-                        <Link to="/dashboard/add-new-book" className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+                        <Link to="/dashboard/create-book" className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
                             <span className="sr-only">Add Book</span>
                             <HiViewGridAdd className="h-6 w-6"/>
                         </Link>
@@ -138,7 +145,7 @@ export const DashboardLayout = () => {
                                 </svg>
                                 Manage Books
                             </Link>
-                            <Link to="/dashboard/add-new-book" className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3">
+                            <Link to="/dashboard/create-book" className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3">
                                 <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>

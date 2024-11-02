@@ -12,6 +12,7 @@ import OrdersPage from "../pages/home/OrdersPage.jsx";
 import {DashboardLayout} from "../pages/dashboard/DashboardLayout.jsx";
 import {AdminRoute} from "./AdminRoute.jsx";
 import AdminLogin from "../components/AdminLogin.jsx";
+import {Dashboard} from "../pages/dashboard/Dashboard.jsx";
 
 const router = createBrowserRouter([
     {
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <AdminRoute>
-                    <div>Dashboard Menu</div>
+                    <Dashboard />
                 </AdminRoute>
             },
             {
