@@ -1,8 +1,8 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {FaGoogle} from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import {useAuth} from "../context/auth/AuthContext.jsx";
+import axios from "axios";
+import {getBaseUrl} from "../utils/baseUrl.js";
 
 const AdminLogin = () => {
 
@@ -13,7 +13,25 @@ const AdminLogin = () => {
     // const {loginUser, signInWithGoogle} = useAuth();
     const onSubmit = async (data) => {
         try {
-            navigate("/")
+            const response = await axios.post(getBaseUrl()+'/api/v1/auth/admin',
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+            const auth = await response.data
+            console.log(auth)
+            if (auth.token) {
+                localStorage.setItem("token", auth.token)
+                //set expiration with Timeout
+                setTimeout(()=> {
+                    localStorage.removeItem('token')
+                    alert('Token has expired. Login.')
+                    navigate("/")
+                }, 3600*1000)
+            }
+            navigate("/dashboard")
         } catch (e) {
             // setMessage("Provide credentials")
         }

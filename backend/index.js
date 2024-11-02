@@ -3,9 +3,6 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-
-
-
 dotenv.config()
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,7 +26,7 @@ import ordersRoutes from "./orders/order.route.js";
 import userRoutes from "./users/user.route.js";
 app.use("/api/v1/books", booksRoutes)
 app.use("/api/v1/orders", ordersRoutes)
-app.use("/api/v1/users", userRoutes)
+app.use("/api/v1/auth", userRoutes)
 
 async function main() {
     await mongoose.connect(process.env.DB_URL)

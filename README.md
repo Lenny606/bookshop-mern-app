@@ -17,6 +17,9 @@ npm install firebase
 npm install @reduxjs/toolkit
 npm install react-redux
 
+# Axios
+npm install axios
+
 
 ## BACKEND 
 npm i cors
